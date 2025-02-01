@@ -9,27 +9,25 @@ and "delete" any "Todo" records.
 const schema = a.schema({
   Event: a.model({
     id:a.id().required(),
-    type:a.belongsTo("EventType","id"),
-    description: a.string(),
-    startTime: a.datetime(),
-    endTime: a.datetime(),
+    typeID:a.string().required(),
+    description: a.string().required(),
+    startTime: a.datetime().required(),
+    endTime: a.datetime().required(),
   }),
   EventType: a.model({
     id:a.id().required(),
-    description: a.string(),
-    color: a.string(),
-    event: a.hasMany('Event', 'id'),
+    description: a.string().required(),
+    color: a.string().required(),
   }),
   Exercise: a.model({
     id:a.id().required(),
-    time:a.datetime(),
-    type:a.belongsTo("ExerciseType","id"),
-    value:a.integer(),
+    time:a.datetime().required(),
+    typeID:a.string().required(),
+    value:a.integer().required(),
   }),
   ExerciseType: a.model({
     id:a.id().required(),
-    description: a.string(),
-    exercise: a.hasMany('Exercise', 'id'),
+    description: a.string().required(),
   }),
 }).authorization((allow) => [allow.publicApiKey()]);;
 

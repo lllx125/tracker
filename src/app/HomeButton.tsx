@@ -12,6 +12,7 @@ export default function HomeButton() {
             height={50}
             className="px-3 py-6"
             onClick={() => router.push("/")}
+            priority
         />
     );
 }

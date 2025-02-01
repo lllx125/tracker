@@ -8,7 +8,7 @@ Amplify.configure(outputs);
 
 export default function Home() {
     const router = useRouter();
-
+    //3 buttons, each link to specific page
     return (
         <div className="flex py-[60px] px-[80px] flex-col items-center gap-[60px] flex-shrink-0">
             <Button
