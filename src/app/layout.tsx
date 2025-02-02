@@ -40,9 +40,6 @@ export default function RootLayout({
     useEffect(() => {
         fetchData();
     });
-    useEffect(() => {
-        console.log(exercise);
-    }, [exercise]);
     // fetch data from the database
     const fetchData = async () => {
         const { data: events } = await client.models.Event.list();

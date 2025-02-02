@@ -10,7 +10,7 @@ const schema = a.schema({
   Event: a.model({
     id:a.id().required(),
     typeID:a.string().required(),
-    description: a.string().required(),
+    description: a.string(),
     startTime: a.datetime().required(),
     endTime: a.datetime().required(),
   }),

@@ -6,7 +6,7 @@ export default function HomeButton() {
     const router = useRouter();
     return (
         <Image
-            src="home.svg"
+            src="/home.svg"
             alt="home"
             width={50}
             height={50}

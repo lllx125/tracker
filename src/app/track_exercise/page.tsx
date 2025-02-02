@@ -32,6 +32,8 @@ export default function TrackExercise() {
         if (newExercise) {
             setExercise((prevItems) => [newExercise, ...prevItems]);
         }
+        setType("");
+        setValue(0);
     };
     // create a new data in the exerciseType database
     const createExerciseType = async () => {
@@ -46,13 +48,15 @@ export default function TrackExercise() {
         if (newExerciseType) {
             setExerciseType((prevItems) => [newExerciseType, ...prevItems]);
         }
+        setDescription("");
     };
+    // delete exercise
     const deleteExercise = async () => {
         await client.models.Exercise.delete({ id: exercise[0].id });
         setExercise((prevItems) => prevItems.slice(1));
     };
     return (
-        <div className="flex px-[40px] py-[40px] gap-[40px] flex-col items-start flex-shrink-0">
+        <div className="flex px-[40px] py-[40px] gap-[20px] flex-col items-start flex-shrink-0">
             <div className="flex gap-[10px] flex-col items-start w-full flex-shrink-0 border-black border-2 rounded p-2">
                 <h1 className="self-center font-extrabold text-xl">
                     Track Exercise
@@ -61,7 +65,7 @@ export default function TrackExercise() {
                 <select
                     className="w-full"
                     onChange={(event) => setType(event.target.value)}
-                    defaultValue={""}
+                    value={type}
                 >
                     <option value="" disabled hidden>
                         Select an option
@@ -72,11 +76,36 @@ export default function TrackExercise() {
                         </option>
                     ))}
                 </select>
+                <h3 className="text-sm">
+                    Previous:{" "}
+                    {type
+                        ? exercise.filter((ex) => ex.typeID === type)[0]
+                            ? exercise.filter((ex) => ex.typeID === type)[0]
+                                  .value
+                            : " "
+                        : " "}
+                </h3>
+                <h3 className="text-sm">
+                    Pre-previous:{" "}
+                    {type
+                        ? exercise.filter((ex) => ex.typeID === type)[1]
+                            ? exercise.filter((ex) => ex.typeID === type)[1]
+                                  .value
+                            : " "
+                        : " "}
+                </h3>
                 <h3 className="font-bold">Value</h3>
                 <Input
                     placeholder="Value"
                     className="w-full"
-                    onChange={(event) => setValue(parseInt(event.target.value))}
+                    value={value}
+                    onChange={(event) => {
+                        if (event.target.value) {
+                            setValue(parseInt(event.target.value));
+                        } else {
+                            setValue(0);
+                        }
+                    }}
                 />
                 <Button
                     className="w-full bg-green-300 active:bg-green-600"
@@ -93,6 +122,7 @@ export default function TrackExercise() {
                 <Input
                     placeholder="Type"
                     className="w-full"
+                    value={description}
                     onChange={(event) => setDescription(event.target.value)}
                 />
                 <Button

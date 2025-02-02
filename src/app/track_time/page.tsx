@@ -1,13 +1,13 @@
-"use client";
-import { useContext } from "react";
-import { DataContext } from "../DataContext";
+import AddEventForm from "./AddEventForm";
+import AddEventTypeForm from "./AddEventTypeForm";
+import StartEvent from "./StartEvent";
 
 export default function TrackTime() {
-    const eventType = useContext(DataContext);
-    console.log(eventType);
     return (
-        <div className="flex px-[80px] flex-col items-start gap-[60px] flex-shrink-0">
-            Track Time
+        <div className="flex px-[40px] py-[40px] gap-[20px] flex-col items-start flex-shrink-0">
+            <StartEvent />
+            <AddEventForm />
+            <AddEventTypeForm />
         </div>
     );
 }
