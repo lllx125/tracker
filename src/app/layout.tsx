@@ -9,6 +9,7 @@ import { DataContext } from "./DataContext";
 //create client
 import { generateClient } from "aws-amplify/data";
 import type { Schema } from "../../amplify/data/resource"; // Path to your backend resource definition
+import { AddMandatory } from "./AddMandatory";
 
 const client = generateClient<Schema>();
 
@@ -39,6 +40,7 @@ export default function RootLayout({
     //fetch data at loading the page
     useEffect(() => {
         fetchData();
+        AddMandatory();
     });
     // fetch data from the database
     const fetchData = async () => {

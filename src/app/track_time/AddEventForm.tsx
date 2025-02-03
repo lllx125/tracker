@@ -15,10 +15,11 @@ import type { Schema } from "../../../amplify/data/resource";
 
 const client = generateClient<Schema>();
 export default function AddEventForm() {
+    // Variables
     const { eventType, setEvent } = useContext(DataContext);
     const [type, setType] = useState("");
     const [description, setDescription] = useState("");
-
+    // end time is the current time, start time and duration are calculated from one another as enter is hit or the field is on blur
     const endTime = Time();
     const [startTime, setStartTime] = useState("");
     const [duration, setDuration] = useState(0);

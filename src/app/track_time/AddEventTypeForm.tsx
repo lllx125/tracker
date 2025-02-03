@@ -27,8 +27,9 @@ export default function AddEventTypeForm() {
             setEventType((prevItems) => [newEventType, ...prevItems]);
         }
         setDescription("");
+        setColor("");
     };
-
+    // add an event type to the data base
     return (
         <div className="flex gap-[10px] flex-col items-start w-full flex-shrink-0 border-black border-2 rounded p-2">
             <h1 className="self-center font-extrabold text-xl">
@@ -41,6 +42,7 @@ export default function AddEventTypeForm() {
                 value={description}
                 onChange={(event) => setDescription(event.target.value)}
             />
+            {/* set the color of the block to the color you enter */}
             <div className="flex gap-3 items-center">
                 <h3 className="font-bold">Event Color</h3>
                 <div

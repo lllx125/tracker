@@ -9,11 +9,15 @@ import { generateClient } from "aws-amplify/data";
 import type { Schema } from "../../../amplify/data/resource";
 
 const client = generateClient<Schema>();
+
+// start to record an event or end a started event
 export default function StartEvent() {
+    //variables
     const { event, eventType, setEvent } = useContext(DataContext);
     const [type, setType] = useState("");
     const [started, setStarted] = useState(false);
     const [description, setDescription] = useState("");
+    // If the end time of the latest event is in the future, then an event has started
     useEffect(() => {
         if (!event[0]) return;
         if (new Date(event[0].endTime).getTime() > new Date(Time()).getTime()) {
@@ -43,7 +47,7 @@ export default function StartEvent() {
         const { data: newEvent } = await client.models.Event.create({
             description,
             typeID: type,
-            endTime: Future(),
+            endTime: Future(), // put a future end time to suggest this event has not ended
             startTime: Time(),
         });
         // append the new data to the front of the current list of exercise so that no refetching and ordering is needed
@@ -52,7 +56,7 @@ export default function StartEvent() {
         }
         setStarted(true);
     };
-
+    // check whether an event has been started, if yes, display the end page, if not dis play the start page
     if (started) {
         return (
             <div className="flex gap-[10px] flex-col items-start w-full flex-shrink-0 border-black border-2 rounded p-2">
